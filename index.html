@@ -146,10 +146,12 @@ function bestellingVersturen() {
     if(levering==="Bezorging"){ tekst += "%0D%0AAdres: " + adres; }
 
     // Open e-mail
-    window.location.href = "mailto:info.versbrood@gmail.com?subject=Bestelling Versbrood&body=" + tekst;
+   let mailBody = encodeURIComponent(tekst);
+window.location.href = "mailto:info.versbrood@gmail.com?subject=Bestelling Versbrood&body=" + mailBody;
 }
 </script>
 
 </body>
 </html>
+
 
