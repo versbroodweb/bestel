@@ -71,13 +71,18 @@ footer { background-color:#7a4b1f; color:white; text-align:center; padding:15px;
 <label>Afhalen of bezorgen:</label>
 <select id="levering">
     <option>Afhalen</option>
-    <option>Bezorging</option>
+    <option>Bezorging(€5)</option>
 </select>
 
 <label>Adres (alleen bij bezorging):</label>
 <input type="text" id="adres">
 
 <button type="submit">Bestelling per e-mail verzenden</button>
+
+    <p style="color: gray; font-size: 14px; margin-top: 5px;">
+    Let op: zorg dat je mailprogramma geopend is voor de bestelling.
+</p>
+
 
 </form>
 </div>
@@ -153,3 +158,4 @@ function bestellingVersturen() {
 
 </body>
 </html>
+
