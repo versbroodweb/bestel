@@ -71,7 +71,7 @@ footer { background-color:#7a4b1f; color:white; text-align:center; padding:15px;
 <label>Afhalen of bezorgen:</label>
 <select id="levering">
     <option>Afhalen</option>
-    <option>Bezorging(€5)</option>
+    <option>Bezorging</option>
 </select>
 
 <label>Adres (alleen bij bezorging):</label>
@@ -99,17 +99,17 @@ function bestellingVersturen() {
         {id:"Witbrood", naam:"Witbrood", prijs:2.30},
         {id:"afbak witte bollen", naam:"afbak witte bollen", prijs:1.75},
         {id:"Volkorenbrood", naam:"Volkorenbrood", prijs:2.30},
-        {id:"afbak volkoren bollen", naam:"afbak volkoren bollen", prijs:1,75}
+        {id:"afbak volkoren bollen", naam:"afbak volkoren bollen", prijs:1.75}
     ];
 
-    let tekst = "Nieuwe bestelling:%0D%0A%0D%0A";
+    let tekst = "Nieuwe bestelling:\n\n";
     let totaal = 0;
 
     // Producten en aantal toevoegen
     producten.forEach(function(p){
         let aantal = parseInt(document.getElementById(p.id).value) || 0;
         if(aantal>0){
-            tekst += p.naam + ": " + aantal + " stuks (€" + (p.prijs*aantal).toFixed(2) + ")%0D%0A";
+            tekst += p.naam + ": " + aantal + " stuks (€" + (p.prijs*aantal).toFixed(2) + ")\n";
             totaal += p.prijs*aantal;
         }
     });
@@ -118,7 +118,7 @@ function bestellingVersturen() {
     let levering = document.getElementById("levering").value;
     let adres = document.getElementById("adres").value;
     let kortingscode = document.getElementById("kortingscode").value.trim().toUpperCase();
-    
+
     // Kortingscodes
     let kortingBedrag = 0;
     let kortingTekst = "";
@@ -134,24 +134,22 @@ function bestellingVersturen() {
         kortingTekst = "Onbekende kortingscode: " + kortingscode + " (geen korting toegepast)";
         document.getElementById("korting-info").innerText = kortingTekst;
     } else {
-        kortingTekst = "Geen kortingscode ingevuld";
+        kortingTekst = "";
         document.getElementById("korting-info").innerText = "";
     }
 
     // Voeg totaal, naam, levering, adres en kortingscode toe aan mail
-    tekst += "%0D%0A" + kortingTekst;
-    tekst += "%0D%0ATotaal: €" + totaal.toFixed(2);
-    tekst += "%0D%0ANaam: " + naam;
-    tekst += "%0D%0ALevering: " + levering;
-    if(levering==="Bezorging"){ tekst += "%0D%0AAdres: " + adres; }
+    tekst += "\n" + kortingTekst;
+    tekst += "\nTotaal: €" + totaal.toFixed(2);
+    tekst += "\nNaam: " + naam;
+    tekst += "\nLevering: " + levering;
+    if(levering === "Bezorging"){ tekst += "\nAdres: " + adres; }
 
-    // Open e-mail
-   let mailBody = encodeURIComponent(tekst);
-window.location.href = "mailto:info.versbrood@gmail.com?subject=Bestelling Versbrood&body=" + mailBody;
+    // Open e-mail veilig
+    let mailBody = encodeURIComponent(tekst);
+    window.location.href = "mailto:info.versbrood@gmail.com?subject=" + encodeURIComponent("Bestelling Versbrood") + "&body=" + mailBody;
 }
 </script>
 
 </body>
 </html>
-
-
