@@ -155,6 +155,8 @@ let telefoon = document.getElementById("telefoon").value;
     tekst += "\nNaam: " + naam;
     tekst += "\nLevering: " + levering;
     if(levering === "Bezorging"){ tekst += "\nAdres: " + adres; }
+        tekst += "\n\nLet op: totaalprijs is excl. eventuele verzendkosten";
+
 
     // Open e-mail veilig
     let mailBody = encodeURIComponent(tekst);
@@ -164,6 +166,7 @@ let telefoon = document.getElementById("telefoon").value;
 
 </body>
 </html>
+
 
 
 
