@@ -40,8 +40,12 @@ footer { background-color:#7a4b1f; color:white; text-align:center; padding:15px;
 
 <form onsubmit="bestellingVersturen(); return false;">
 
+        <label>Telefoonnummer:</label>
+<input type="text" id="telefoon" placeholder="Bijv. 0612345678" required>
+
+
         <p style="color: gray; font-size: 14px; margin-top: 5px;">
-    Let op: zorg dat je mailprogramma geopend is voor de bestelling.
+    als u bestelling is geplaatst zuklt u zo spoedig mogelijk een reactie klijgen 
 </p>
 
 
@@ -123,6 +127,8 @@ function bestellingVersturen() {
     let levering = document.getElementById("levering").value;
     let adres = document.getElementById("adres").value;
     let kortingscode = document.getElementById("kortingscode").value.trim().toUpperCase();
+let telefoon = document.getElementById("telefoon").value;
+
 
     // Kortingscodes
     let kortingBedrag = 0;
@@ -158,5 +164,6 @@ function bestellingVersturen() {
 
 </body>
 </html>
+
 
 
