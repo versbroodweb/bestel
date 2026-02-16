@@ -1,145 +1,86 @@
 <!DOCTYPE html>
-
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Versbrood Almelo</title>
-
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f7f3e9;
-    color: #333;
-}
-
-header {
-    background-color: #8b5a2b;
-    color: white;
-    text-align: center;
-    padding: 25px 10px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 32px;
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-}
-
-.section {
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.product {
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.product:last-child {
-    border-bottom: none;
-}
-
-.product input {
-    width: 60px;
-    padding: 5px;
-}
-
-button {
-    background-color: #8b5a2b;
-    color: white;
-    border: none;
-    padding: 15px;
-    width: 100%;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #6f451f;
-}
-
-.contact p {
-    margin: 5px 0;
-}
-
-footer {
-    text-align: center;
-    padding: 15px;
-    background: #8b5a2b;
-    color: white;
-}
+* { box-sizing: border-box; margin:0; padding:0; font-family: Arial, sans-serif; }
+body { background-color: #f4efe6; color: #333; }
+header { background-color: #7a4b1f; color:white; text-align:center; padding:25px 15px; }
+header h1 { font-size:32px; margin-bottom:5px; }
+header p { font-size:16px; }
+.container { max-width:900px; margin:20px auto; padding:15px; }
+.section { background:white; padding:20px; margin-bottom:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+h2 { margin-bottom:15px; }
+.product { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #ddd; }
+.product:last-child { border-bottom:none; }
+.product span { font-size:16px; }
+.product input { width:60px; padding:6px; }
+input[type="text"], select { width:100%; padding:10px; margin-top:5px; margin-bottom:15px; }
+button { width:100%; padding:15px; background-color:#7a4b1f; color:white; border:none; font-size:18px; border-radius:5px; cursor:pointer; }
+button:hover { background-color:#5e3817; }
+.contact p { margin-bottom:6px; }
+footer { background-color:#7a4b1f; color:white; text-align:center; padding:15px; margin-top:30px; }
+#korting-info { color: green; font-weight: bold; margin-bottom: 10px; }
+@media (max-width:600px){ header h1{ font-size:26px; } }
 </style>
-
 </head>
-
 <body>
 
 <header>
-    <h1>Versbrood</h1>
-    <p>Dagelijks vers brood - Afhalen & Bezorging in en rond Almelo</p>
+<h1>Versbrood</h1>
+<p>Dagelijks vers brood in en rond Almelo – Afhalen & Bezorging</p>
 </header>
 
 <div class="container">
 
 <div class="section">
-<h2>Bestel Brood</h2>
+<h2>Bestel uw brood</h2>
 
-<form onsubmit="sendOrder(); return false;">
+<form onsubmit="bestellingVersturen(); return false;">
+
+<!-- PRODUCTEN -->
+<div class="product">
+    <span>Witbrood (€2,30)</span>
+    <input type="number" id="Witbrood" min="0" value="0">
+</div>
 
 <div class="product">
-    <span>afbak witte bollen 2x60g (€1,75)</span>
+    <span>afbak witte bollen 2 stuks (€1,75)</span>
     <input type="number" id="afbak witte bollen" min="0" value="0">
 </div>
 
 <div class="product">
-    <span>afbak bruine bollen 2x60g (€1,75)</span>
-    <input type="number" id="afbak bruine bollen" min="0" value="0">
-</div>
-
-<div class="product">
-    <span>Volkorenbrood (€2,40)</span>
+    <span>Volkorenbrood (€2,30)</span>
     <input type="number" id="Volkorenbrood" min="0" value="0">
 </div>
 
 <div class="product">
-    <span>Witbrood(€2,40)</span>
-    <input type="number" id="Witbrood" min="0" value="0">
+    <span>afbak volkoren bollen 2 stuks (€1,75)</span>
+    <input type="number" id="afbak volkoren bollen" min="0" value="0">
 </div>
 
-<br>
-<label>Naam:</label><br>
-<input type="text" id="naam" required style="width:100%; padding:8px;"><br><br>
+<label>Kortingscode (optioneel):</label>
+<input type="text" id="kortingscode" placeholder="Bijv. VERSBROOD5">
+<p id="korting-info"></p>
 
-<label>Afhalen of bezorgen:</label><br> <select id="levering" style="width:100%; padding:8px;">
+<label>Naam:</label>
+<input type="text" id="naam" required>
 
-<option>Afhalen</option>
-<option>Bezorging(€5)</option>
-</select><br><br>
+<label>Afhalen of bezorgen:</label>
+<select id="levering">
+    <option>Afhalen</option>
+    <option>Bezorging(€5)</option>
+</select>
 
-<label>Adres (alleen bij bezorging):</label><br> <input type="text" id="adres" style="width:100%; padding:8px;"><br><br>
+<label>Adres (alleen bij bezorging):</label>
+<input type="text" id="adres">
 
-<button type="submit">Bestelling per e-mail versturen</button>
+<button type="submit">Bestelling per e-mail verzenden</button>
 
 </form>
 </div>
-<label>Kortingscode (optioneel):</label>
-<input type="text" id="kortingscode" placeholder="Bijv. VERSBROOD5">
-<p id="korting-info" style="color: green; font-weight: bold;"></p>
-
 
 <div class="section contact">
 <h2>Contact</h2>
@@ -150,41 +91,62 @@ footer {
 
 </div>
 
-<footer>
-© 2026 Versbrood
-</footer>
+<footer>© 2026 Versbrood</footer>
 
 <script>
-function sendOrder() {
+function bestellingVersturen() {
+    let producten = [
+        {id:"Witbrood", naam:"Witbrood", prijs:2.30},
+        {id:"afbak witte bollen", naam:"afbak witte bollen", prijs:1.75},
+        {id:"Volkorenbrood", naam:"Volkorenbrood", prijs:2.30},
+        {id:"afbak volkoren bollen", naam:"afbak volkoren bollen", prijs:1,75}
+    ];
 
-let producten = [
-"Witbrood",
-"Bruinbrood",
-"Volkorenbrood",
-"Meergranenbrood"
-];
+    let tekst = "Nieuwe bestelling:%0D%0A%0D%0A";
+    let totaal = 0;
 
-let bestelling = "Nieuwe bestelling:%0D%0A%0D%0A";
+    // Producten en aantal toevoegen
+    producten.forEach(function(p){
+        let aantal = parseInt(document.getElementById(p.id).value) || 0;
+        if(aantal>0){
+            tekst += p.naam + ": " + aantal + " stuks (€" + (p.prijs*aantal).toFixed(2) + ")%0D%0A";
+            totaal += p.prijs*aantal;
+        }
+    });
 
-producten.forEach(function(p) {
-    let aantal = document.getElementById(p).value;
-    if (aantal > 0) {
-        bestelling += p + ": " + aantal + "%0D%0A";
+    let naam = document.getElementById("naam").value;
+    let levering = document.getElementById("levering").value;
+    let adres = document.getElementById("adres").value;
+    let kortingscode = document.getElementById("kortingscode").value.trim().toUpperCase();
+    
+    // Kortingscodes
+    let kortingBedrag = 0;
+    let kortingTekst = "";
+
+    if(kortingscode === "VERSBROOD5") { kortingBedrag = 5; }
+    else if(kortingscode === "VERSBROOD10") { kortingBedrag = 10; }
+
+    if(kortingBedrag>0){
+        totaal -= kortingBedrag;
+        kortingTekst = "Kortingscode toegepast: " + kortingscode + " (€" + kortingBedrag.toFixed(2) + " korting)";
+        document.getElementById("korting-info").innerText = kortingTekst;
+    } else if(kortingscode.length>0){
+        kortingTekst = "Onbekende kortingscode: " + kortingscode + " (geen korting toegepast)";
+        document.getElementById("korting-info").innerText = kortingTekst;
+    } else {
+        kortingTekst = "Geen kortingscode ingevuld";
+        document.getElementById("korting-info").innerText = "";
     }
-});
 
-let naam = document.getElementById("naam").value;
-let levering = document.getElementById("levering").value;
-let adres = document.getElementById("adres").value;
+    // Voeg totaal, naam, levering, adres en kortingscode toe aan mail
+    tekst += "%0D%0A" + kortingTekst;
+    tekst += "%0D%0ATotaal: €" + totaal.toFixed(2);
+    tekst += "%0D%0ANaam: " + naam;
+    tekst += "%0D%0ALevering: " + levering;
+    if(levering==="Bezorging"){ tekst += "%0D%0AAdres: " + adres; }
 
-bestelling += "%0D%0ANaam: " + naam;
-bestelling += "%0D%0ALevering: " + levering;
-
-if (levering === "Bezorging") {
-    bestelling += "%0D%0AAdres: " + adres;
-}
-
-window.location.href = "mailto:info.versbrood@gmail.com?subject=Bestelling Versbrood&body=" + bestelling;
+    // Open e-mail
+    window.location.href = "mailto:info.versbrood@gmail.com?subject=Bestelling Versbrood&body=" + tekst;
 }
 </script>
 
